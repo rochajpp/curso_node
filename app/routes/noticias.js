@@ -1,15 +1,7 @@
+
 module.exports = (app) => {
-
     app.get("/noticias", (req, res) => {
-        var mysql = require('mysql2'); // mysql2 modulo atualizado para o mysql mais atual;
-
-        var connection = mysql.createConnection({ // Criando a conexão com o banco de dados
-            host: 'localhost',
-            user: 'root',
-            password: 'database',
-            database: 'portal_noticias'
-        });
-
+        const connection = app.config.dbConnection();
 
         connection.connect((err) => {
             if(err){
