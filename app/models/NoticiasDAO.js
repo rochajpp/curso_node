@@ -19,4 +19,4 @@ NoticiasDAO.prototype.salvarNoticia = function (noticia, callback) {
 
 module.exports = () => {
     return NoticiasDAO;
-}
+} 
