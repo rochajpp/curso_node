@@ -1,12 +1,13 @@
 module.exports = (app) => {
     
     app.get('/formulario_inclusao_noticia', (req, res) => {
-        res.render("admin/form_add_noticia", {error: null});
+        res.render("admin/form_add_noticia", {validacao: {}, noticia: {}});
     });
 
     app.post('/noticias/salvar', (req, res) => {
         
         var noticia = req.body;
+
         req.assert('titulo', 'Título é obrigatório').notEmpty(); 
         req.assert('resumo', 'Resumo é obirgatório').notEmpty();
         req.assert('resumo', 'Resumo deve conter entre 10 e 100 caracteres').len(10, 100);
@@ -15,9 +16,9 @@ module.exports = (app) => {
         req.assert('noticia', 'Notícia é obrigatória').notEmpty();
 
         let erros = req.validationErrors();
-
+        console.log(erros);
         if(erros){    
-            res.render("admin/form_add_noticia");
+            res.render("admin/form_add_noticia", {validacao: erros, noticia: noticia});
             return;
         }
 
