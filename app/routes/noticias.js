@@ -1,20 +1,9 @@
 module.exports = (app) => {
     app.get("/noticias", (req, res) => {
-
-        const connection = app.config.dbConnection();
-        const NoticiasDAO = new app.app.models.NoticiasDAO(connection);
-
-        NoticiasDAO.getNoticias((error, result) => {
-            res.render('noticias/noticias', {noticias: result}); //Enviando uma resposta ao servidor do ejs com as informações do banco de dados;
-        });
+        app.app.controllers.noticias.noticias(app, req, res);
     });
 
     app.get("/noticia", (req, res) => {
-        const connection = app.config.dbConnection();
-        const NoticiasDAO = new app.app.models.NoticiasDAO(connection);
-
-        NoticiasDAO.getNoticia((error, result) => {
-            res.render('noticias/noticia', {noticia: result});
-        })
+        app.app.controllers.noticias.noticia(app, req, res);
     });
 }
